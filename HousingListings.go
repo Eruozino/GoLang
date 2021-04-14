@@ -8,8 +8,6 @@ import (
 )
 
 // ListingInfo structure
-// ** QUESTION 3 a) add the common fields to this structure
-//   and embed this structure into Condo, House, TownHouse
 //------------------------------------------------------
 type ListingInfo struct {
 	StreetAddress string
@@ -42,7 +40,6 @@ type TownHouse struct {
 }
 
 // Interface for interacting with ListingInfo
-// ** QUESTION 3 b) Define the RealEstate interface with the getters for the common fields of Condo, House, TownHouse
 //-----------------------------------------------------------------------------------------------------------------
 type RealEstate interface {
 	getStreetAddress() string
@@ -52,7 +49,6 @@ type RealEstate interface {
 }
 
 // Implementation for interfacing with Condo
-// ** QUESTION 3 b) functions to be modified to take advantage of the RealEstate interface and ListingInfo structure
 //Condo
 func (L *Condo) getStreetAddress() string {
 	return L.StreetAddress
