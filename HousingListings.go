@@ -1,4 +1,4 @@
-// houses.go
+// HousingListings.go
 package main
 
 import (
