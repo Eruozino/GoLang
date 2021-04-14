@@ -200,34 +200,25 @@ func main() {
 	// Seeding the pseudo randon number generator; resulting in different bidding processes
 	rand.Seed(time.Now().UnixNano())
 
-	// STEP 1: Real estate listings
-	// ** QUESTION 3 b) Change the declaration of the listings variable to be a slice of RealEstate
+	//Real estate listing Scenario
 	listings := []RealEstate{
 		&Condo{ListingInfo{"Goulburn Ave 1120", 750000, false}, 900},
 		&Condo{ListingInfo{"Summerset Street 10", 950000, false}, 850},
 		&Condo{ListingInfo{"Wilbord Avenue 999", 1250000, false}, 1250}}
-	// ** QUESTION 3 c) Add a TownHouse of 2 levels at "Elgin 123" for $2100000 to listings
-	// ** QUESTION 3 c) Add a House at "Maplewood 889" for $850000 with lot size of 50 x 110 to listings
 	listings = append(listings, &TownHouse{ListingInfo{"Elgin 123", 2100000, false}, 2})
 	listings = append(listings, &House{ListingInfo{"Maplewood 889", 850000, false}, Rectangle{50, 110}})
 
-	// STEP 2: Seller for every listing
+	// Seller for every listing
 	sellers := []*Seller{NewSeller("Eve", listings[0]), NewSeller("Monica", listings[1]), NewSeller("Ramon", listings[2])}
-	// ** QUESTION 3 d) Add Paul the TownHouse seller
 	sellers = append(sellers, NewSeller("Paul", listings[3]))
-
-	// ** QUESTION 3 d) Add Mary the House seller
 	sellers = append(sellers, NewSeller("Mary", listings[4]))
 
-	// STEP 3: 7 Buyers
+	// Buyers
 	buyers := []*Buyer{NewBuyer("Zara"), NewBuyer("Jim"), NewBuyer("Claude"), NewBuyer("Emilie"),
 		NewBuyer("Amelie"), NewBuyer("Ali")}
 
-	// STEP 4: Bidding process
-	for _, buy := range buyers { // ** QUESTION 3 d) Here buyers try to buy one after the other (sequentially)
-		// we want Buyers to bid concurrently
-		// introduce a Go rountine (possibly with a lambda function)
-		//-----------------------------------------------------------
+	// Bidding process
+	for _, buy := range buyers { 
 		// This is the bidding process for one buyer
 		for amount, valid := buy.nextBid(); valid; amount, valid = buy.nextBid() {
 			// Buyers try to buy any property for current bidding amount
@@ -257,7 +248,7 @@ func main() {
 		}
 		buy.Active = false // Buyer went to upper limit or was successful
 	}
-	// STEP 5: Synchronization
+	// Synchronization
 	// Ensure that we only exit if bidding process is complete
 	for buyerActive(buyers) && objectForSale(sellers) {
 		time.Sleep(50 * time.Millisecond)
