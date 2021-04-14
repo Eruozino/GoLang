@@ -23,8 +23,6 @@ const (
 	b13 = 0.1
 )
 
-// func hiddenNode( )
-
 func sigmoid(x float64) float64 {
 	return 1.0 / (1.0 + math.Exp(-x))
 }
